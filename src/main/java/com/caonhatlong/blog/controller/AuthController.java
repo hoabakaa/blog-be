@@ -1,5 +1,6 @@
 package com.caonhatlong.blog.controller;
 
+import com.caonhatlong.blog.dto.AuthenticationResponse;
 import com.caonhatlong.blog.dto.LoginRequest;
 import com.caonhatlong.blog.dto.RegisterRequest;
 import com.caonhatlong.blog.service.AuthService;
@@ -31,7 +32,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginRequest loginRequest){
+    public AuthenticationResponse login(@RequestBody LoginRequest loginRequest){
         return authService.login(loginRequest);
     }
 }

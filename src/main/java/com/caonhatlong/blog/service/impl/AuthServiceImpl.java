@@ -1,5 +1,6 @@
 package com.caonhatlong.blog.service.impl;
 
+import com.caonhatlong.blog.dto.AuthenticationResponse;
 import com.caonhatlong.blog.dto.LoginRequest;
 import com.caonhatlong.blog.dto.RegisterRequest;
 import com.caonhatlong.blog.model.User;
@@ -45,10 +46,11 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public String login(LoginRequest loginRequest) {
+    public AuthenticationResponse login(LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return jwtProvider.generateTokent(authentication);
+        String token = jwtProvider.generateTokent(authentication);
+        return new AuthenticationResponse(token, loginRequest.getUsername());
     }
 
     private String encodePassword(String password) {
