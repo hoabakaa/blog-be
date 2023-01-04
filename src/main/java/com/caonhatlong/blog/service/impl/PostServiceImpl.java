@@ -33,6 +33,7 @@ public class PostServiceImpl implements PostService {
         User username = authService.getCurrentUser().orElseThrow(() -> new IllegalArgumentException("No user logged in"));
         post.setUserName(username.getUsername());
         post.setCreateAt(Instant.now());
+        post.setUpdateAt(Instant.now());
         postRepository.save(post);
     }
 
